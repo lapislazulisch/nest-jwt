@@ -1,0 +1,29 @@
+# POST http://localhost:3010/auth/login
+# Content-Type: application/json
+# {
+#     "username": "lapislazuli",
+#     "password": "asdfghjkl"
+# }
+# POST http://localhost:3000/auth/login
+# Content-Type: application/json
+
+# {
+#     "username":"lapislazuli",
+#     "password":"asdfghjk"
+# }
+
+ 
+### 登陆后获取返回的token并设置为全局变量
+# @name loginAdmin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "lapislazuli",
+    "password": "asdfghjkl"
+}
+
+###
+@token = {{loginAdmin.response.body.$.access_token}}
+GET http://localhost:3000/auth/profile
+Authorization: Bearer {{token}}
